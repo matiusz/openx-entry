@@ -18,8 +18,12 @@ class TestBinTree(unittest.TestCase):
         self.assertEqual(BTCalc.treeSum(self.root), 38)
     def test_treeAverage(self):
         self.assertEqual(BTCalc.treeAverage(self.root), 3.8)
-    def test_treeMedian(self):
+    def test_treeMedianOdd(self):
+        self.root.right.right.right.right = None
+        self.assertEqual(BTCalc.treeMedian(self.root), 3)
+    def test_treeMedianEven(self):
         self.assertEqual(BTCalc.treeMedian(self.root), 4)
+
     def test_leafSumAndAverage(self):
         self.root.left = None
         self.root.right = None
