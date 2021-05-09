@@ -8,53 +8,43 @@ class BTNode:
 
 
 class BTCalc:
-
-    @staticmethod
-    def treeAverage(node):
-        (sum, count) = BTCalc.__sumAndCount(node)
+    def treeAverage(self, node):
+        (sum, count) = self.__sumAndCount(node)
         return sum / count
-
-    @staticmethod
-    def treeSum(node):
-        (sum, count) = BTCalc.__sumAndCount(node)
+    def treeSum(self, node):
+        (sum, count) = self.__sumAndCount(node)
         return sum
-
-    @staticmethod
-    def treeMedian(node):
-        valueList = BTCalc.__toList(node)
+    def treeMedian(self, node):
+        valueList = self.__toList(node)
         if len(valueList) % 2 == 1:
-            return BTCalc.__quickselect(valueList, (len(valueList)-1)/2)
+            return self.__quickselect(valueList, (len(valueList)-1)/2)
         else:
-            val1 = BTCalc.__quickselect(valueList, (len(valueList)/2) - 1)
-            val2 = BTCalc.__quickselect(valueList, (len(valueList) / 2))
+            val1 = self.__quickselect(valueList, (len(valueList)/2) - 1)
+            val2 = self.__quickselect(valueList, (len(valueList) / 2))
             return (val1 + val2) / 2
-
-    @staticmethod
-    def __sumAndCount(node):
+    def __sumAndCount(self, node):
         treeSum = node.val
         treeCount = 1
         if node.left:
-            left = BTCalc.__sumAndCount(node.left)
+            left = self.__sumAndCount(node.left)
             treeSum += left[0]
             treeCount += left[1]
         if node.right:
-            right = BTCalc.__sumAndCount(node.right)
+            right = self.__sumAndCount(node.right)
             treeSum += right[0]
             treeCount += right[1]
         return treeSum, treeCount
-    @staticmethod
-    def __toList(node):
+    def __toList(self, node):
         if node.left:
-            leftList = BTCalc.__toList(node.left)
+            leftList = self.__toList(node.left)
         else:
             leftList = []
         if node.right:
-            rightList = BTCalc.__toList(node.right)
+            rightList = self.__toList(node.right)
         else:
             rightList = []
         return leftList + [node.val] + rightList
-    @staticmethod
-    def __quickselect(valueList, k):
+    def __quickselect(self, valueList, k):
         pivot = choice(valueList)
         left = []
         middle = []
@@ -67,10 +57,10 @@ class BTCalc:
             else:
                 right.append(val)
         if len(left) > k:
-            return BTCalc.__quickselect(left, k)
+            return self.__quickselect(left, k)
         elif len(left) + len(middle) > k:
             return pivot
         else:
-            return BTCalc.__quickselect(right, k - len(left) - len(middle))
+            return self.__quickselect(right, k - len(left) - len(middle))
 
 
